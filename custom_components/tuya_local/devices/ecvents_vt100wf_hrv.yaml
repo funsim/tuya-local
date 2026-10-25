@@ -1,0 +1,83 @@
+name: Heat recovery ventilator
+products:
+  - id: o0woa0xg1moaa7kf
+    manufacturer: ECvents
+    model: VT100-WF
+entities:
+  - entity: fan
+    translation_only_key: ventilation
+    dps:
+      - id: 1
+        type: boolean
+        name: switch
+      - id: 101
+        type: integer
+        name: speed
+        range:
+          min: 0
+          max: 3
+      - id: 105
+        type: boolean
+        name: preset_mode
+        mapping:
+          - dps_val: true
+            value: auto
+          - dps_val: dummy_sleep
+            value: sleep
+            value_redirect: preset_sleep
+          - dps_val: dummy_fresh
+            value: fresh
+            value_redirect: preset_fresh
+          - dps_val: dummy_extractor
+            value: extractor
+            value_redirect: preset_extractor
+          - dps_val: dummy_hr
+            value: heat_recovery
+            value_redirect: preset_heat_recovery
+          - dps_val: false
+            value_redirect: preset_sleep
+      - id: 111
+        type: boolean
+        name: preset_sleep
+        mapping:
+          - dps_val: true
+            value: sleep
+          - dps_val: false
+            value_redirect: preset_fresh
+        hidden: true
+      - id: 102
+        type: boolean
+        name: preset_fresh
+        mapping:
+          - dps_val: true
+            value: fresh
+          - dps_val: false
+            value_redirect: preset_extractor
+        hidden: true
+      - id: 103
+        type: boolean
+        name: preset_extractor
+        mapping:
+          - dps_val: true
+            value: extractor
+          - dps_val: false
+            value_redirect: preset_heat_recovery
+        hidden: true
+      - id: 104
+        type: boolean
+        name: preset_heat_recovery
+        mapping:
+          - dps_val: true
+            value: heat_recovery
+          - dps_val: false
+            value: NONE
+        hidden: true
+      - id: 106
+        type: boolean
+        name: unknown_106
+      - id: 112
+        type: boolean
+        name: unknown_112
+      - id: 113
+        type: boolean
+        name: unknown_113
